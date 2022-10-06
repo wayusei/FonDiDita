@@ -15,7 +15,7 @@ try {
     sequelize.sync();
     console.log('Connected to DB');
 } catch (error) {
-    console.log('Unable to connect to DB:', error);
+    console.log('Unable to connect to DB', error);
 }
 
 app.listen(3000, () => {
