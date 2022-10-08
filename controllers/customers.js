@@ -38,8 +38,8 @@ async function signUp(req, res) {
     try { 
         const cus = await Customers.create(body);
         const {salt, hash} = Customers.createPassword(body['password']);
-        cus.password = salt;
-        cus.default_shipping_address = hash;
+        cus.password_salt = salt;
+        cus.password_hash = hash;
         await cus.save();
         res.status(201).json(cus);
     } catch (err) {
@@ -60,7 +60,7 @@ async function logIn(req, res) {
     if (!cus) {
         return res.status(404).json({error: "User not found"});
     }
-    if (Customers.validatePassword(body['password'], cus.password, cus.default_shipping_address)) {
+    if (Customers.validatePassword(body['password'], cus.password_salt, cus.password_hash)) {
         return res.status(200).json({
             cus: cus.username,
             email: cus.email,

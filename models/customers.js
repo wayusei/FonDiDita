@@ -17,11 +17,12 @@ Customers.init(
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     
-    password: DataTypes.STRING,
+    password_hash: DataTypes.STRING,
     full_name: DataTypes.STRING,
     billing_address: DataTypes.STRING,
     default_shipping_address: DataTypes.STRING,
-    phone: DataTypes.INTEGER
+    phone: DataTypes.INTEGER,
+    password_salt: DataTypes.STRING,
     },
     {
         sequelize,
