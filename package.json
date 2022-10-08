@@ -18,7 +18,9 @@
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.24.0",
-    "sqlite3": "^5.1.2"
+    "sqlite3": "^5.1.2",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0"
   },
   "repository": {
     "type": "git",
