@@ -7,6 +7,7 @@ const {
     insertCustomer,
     signUp,
     logIn,
+    encriptarTodo,
 } = require('../controllers/customers');
 const auth = require('../config/auth');
 
@@ -24,10 +25,11 @@ const auth = require('../config/auth');
  *          type: json
  */
 router.get('/', getCustomers);
-router.get('/:id', getCustomerbyId);
-router.post('/insert',auth.required, insertCustomer);
+router.get('/getbyId/:id', getCustomerbyId);
+router.post('/insert',auth.isAdmin, insertCustomer);
 router.post('/signUp', signUp);
 router.post('/logIn', logIn);
+router.get('/encriptar', auth.isAdmin, encriptarTodo);
 
 
 

@@ -48,6 +48,8 @@ Customers.validatePassword = function(password, user_salt, user_hash) {
     return user_hash === hash;
 }
 
+
+
 Customers.generateJWT = function(user) {
     const today = new Date();
     const exp = new Date(today);

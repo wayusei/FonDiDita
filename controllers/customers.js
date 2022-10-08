@@ -22,7 +22,13 @@ async function getCustomers(req, res) {
 
 async function getCustomerbyId(req, res) {
     const id = req.params.id;
-    const cus = await Customers.findByPk(id);
+    
+    const cus = await Customers.findAll({
+        where: {id:id}, attributes:['username','password_salt']
+    
+    });
+    
+
     res.status(200).json(cus);
 }
 
@@ -54,6 +60,40 @@ async function signUp(req, res) {
     }
 }
 
+async function encriptarTodo(req, res) {
+    
+    const customers = await Customers.findAll();
+    //const j= res.json(customers);
+    //    res.status(200).json(customers);    
+
+    
+    //console.log(customers);
+
+    
+    for(const element of customers){
+
+        //console.log(element.id);//
+        
+        const id= element.id;
+
+            const {salt, hash} = Customers.createPassword('1234');
+            
+
+            await Customers.update(
+                {   password_salt:salt,
+                    password_hash:hash},
+                        {where: {id}}
+            );
+            //const god_updated = await Customers.findByPk(id);
+            //res.status(200).json(god_updated);
+
+    }
+    
+
+
+   
+}
+
 async function logIn(req, res) {
     const body = req.body;
     const cus = await Customers.findOne({where: {username: body['username']}});
@@ -78,4 +118,5 @@ module.exports = {
     insertCustomer,
     signUp,
     logIn,
+    encriptarTodo,
 }
