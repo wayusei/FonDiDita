@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 const express = require('express');
 const sequelize = require('./config/db');
@@ -32,11 +31,11 @@ try {
     sequelize.sync();
     console.log('Connected to DB');
 } catch (error) {
-    console.log('Unable to connect to DB:', error);
+    console.log('Unable to connect to DB', error);
 }
 
-app.listen(3000, () => {
-    console.log("Server listing on PORT", process.env['PORT']);
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Server listing on PORT", process.env.PORT);
 });
 
 
