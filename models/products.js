@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes} = require('sequelize');
 const sequelize = require('../config/db');
 const Orders_Details = require('./orders_details');
+const Sellers = require('./sellers');
 
 
 const Products = sequelize.define('products', {
@@ -30,12 +31,16 @@ const Products = sequelize.define('products', {
     seller_id:{ // NOTA: Este parece no necesitarce al hacerce la asociación
         type: DataTypes.INTEGER
     }
+},
+{
+    freezeTableName: true,
+    timestamps:false
 });
 
 // Associations
-Products.hasMany(Orders_Details, {
+/* Products.hasMany(Orders_Details, {
     foreignKey: 'product_id'
 });
-Orders_Details.belongsTo(Products);
+Orders_Details.belongsTo(Products); */
 
 module.exports = Products;

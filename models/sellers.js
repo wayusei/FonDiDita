@@ -23,12 +23,16 @@ const Sellers = sequelize.define('sellers', {
     account:{
         type: DataTypes.STRING
     }
+},
+{
+    freezeTableName: true,
+    timestamps:false
 });
 
 // Associations
-Sellers.hasMany(Products, {
+/* Sellers.hasMany(Products, {
     foreignKey: 'seller_id'
 });
-Products.belongsTo(Sellers);
+Products.belongsTo(Sellers); */
 
 module.exports = Sellers;

@@ -21,9 +21,9 @@ const Categories = sequelize.define('categories', {
 });
 
 // Associations
-Categories.hasMany(Products, {
+/* Categories.hasMany(Products, {
     foreignKey: 'category'
 });
-Products.belongsTo(Categories);
+Products.belongsTo(Categories); */
 
 module.exports = Categories;
