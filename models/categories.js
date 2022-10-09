@@ -12,18 +12,14 @@ const Categories = sequelize.define('categories', {
     name:{
         type: DataTypes.STRING
     },
-    /* category_id:{
-        type: DataTypes.STRING
-    }, */ // NOTA: Este no aparece en postgres o no lo veo
     description:{
         type: DataTypes.STRING
     }
+},
+{
+    freezeTableName: true,
+    timestamps:false
 });
 
-// Associations
-/* Categories.hasMany(Products, {
-    foreignKey: 'category'
-});
-Products.belongsTo(Categories); */
 
 module.exports = Categories;

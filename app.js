@@ -13,15 +13,24 @@ const swaggerUI =require('swagger-ui-express');
 
 
 
+const swaggerOptions = require('./config/swagger');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+
 const app = express();
 app.use(express.json());
 app.use(auth.optional);
 app.use('/', routes);
 
+<<<<<<< HEAD
 //const swaggerOptions =require('./config/swagger');
 const swaggerDocs =swaggerJsDoc(swaggerOptions);
 //app.use('/docs',swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 app.use('/docs',swaggerUI.serve, swaggerUI.setup(swaggerDocs))
+=======
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+>>>>>>> 1e82b5128e57dedc501ad777662b40f95292c29b
 
 try {
     sequelize.authenticate();
