@@ -43,7 +43,7 @@ router.get('/', getOrderStatus);
  * '/order_status/{id}':
  *  get:
  *     tags:
- *     - Orders Status
+ *     - Order Status
  *     summary: Obtiene el estatus de una orden mediante su id.
  *     description: Obtiene el estatus de orden existente en la BD mediante su id.
  *     requestBody:

@@ -53,11 +53,11 @@ Customers.validatePassword = function(password, user_salt, user_hash) {
 Customers.generateJWT = function(user) {
     const today = new Date();
     const exp = new Date(today);
-    exp.setDate(today.getDate() + 60); // En 2 meses
+    exp.setDate(today.getDate() + 60); 
 
     return jwt.sign({
         user: user.username,
-        exp: parseInt(exp.getTime() / 1000) // En segundos
+        exp: parseInt(exp.getTime() / 1000)
     }, secret);
 }
 

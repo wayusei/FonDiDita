@@ -8,7 +8,7 @@ const orders_details = require('./orders_details');
 const order_status = require('./order_status');
 
 router.get('/', (req, res) => {
-    res.json({'info': 'Welcome to fondidita API!'})
+    res.json({'info': 'Welcome to fondidita API!, Para ver la documentación entra a https://fondidita.herokuapp.com/docs/'})
 });
 
 router.use('/customers', customers);

@@ -21,8 +21,4 @@ try {
   console.error('Hubo un problema con la conexión', error);
 }
 
-/* const sequelize = new Sequelize(process.env.DATABASE_URL,   {dialectOptions: {
-  ssl: {require:true, rejectUnauthorized: false }
-}}); */
-
 module.exports = sequelize;

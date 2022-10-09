@@ -39,7 +39,6 @@ async function signUpSeller(req, res) {
     const body = req.body;
     try { 
         const existId = await Sellers.findOne({where:{id: body.id}});
-        // console.log("USER: ",existId);
         if(!existId){
             const seller = await Sellers.create(body);
             const {salt, hash} = Sellers.createPassword(body['password']);
@@ -73,7 +72,7 @@ async function logInSeller(req, res) {
             user: user.username,
             email: user.email,
             token: Sellers.generateJWT(user)
-        }); // JWT
+        }); 
     } else {
         return res.status(400).json({mensaje: "Password Incorrecto"});
     }
