@@ -61,17 +61,5 @@ Customers.generateJWT = function(user) {
     }, secret);
 }
 
-/**
- * 
- * @swagger 
- * /customers/:
- * get:
- *  summary: Creación y consulta de clientes (customers)
- *  produces: 
- *      - application/json
- *  responses: 
- *      200:
- *          description: Todos los clientes
- *          type: json
- */
+
 module.exports = Customers;

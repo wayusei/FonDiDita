@@ -1,19 +1,7 @@
 const Customers = require('../models/customers');
 
 
-/**
- * 
- * @swagger 
- * /customers/:
- * get:
- *  summary: Creación y consulta de clientes (customers)
- *  produces: 
- *      - application/json
- *  responses: 
- *      200:
- *          description: Todos los clientes
- *          type: json
- */
+
 
 async function getCustomers(req, res) {
     const customers = await Customers.findAll();
