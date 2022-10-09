@@ -11,20 +11,24 @@ const options = {
                 name: "Equipo-16 - GitHub repository",
                 url: "https://github.com/wayusei/FonDiDita"
             },
-        }
+        },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT",
+                }
+            }
+        },
+        security: [
+            {
+              bearerAuth: []
+            },
+          ],
     },
     server: "localhost:3000/",
-    apis: ["./routes/*.js"],
-    components: {
-        securitySchemes: {
-            Authorization: {
-                type: "http",
-                scheme: "bearer",
-                bearerFormat: "JWT",
-                value: "Bearer <JWT token here>"
-            }
-        }
-    }
+    apis: ["./routes/*.js"]
 }
 
 module.exports = options

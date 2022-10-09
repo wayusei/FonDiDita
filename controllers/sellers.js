@@ -3,7 +3,16 @@ const Sellers = require('../models/sellers');
 async function getSellers(req, res) {
     try {
         const sellers = await Sellers.findAll();
-        res.status(200).json(sellers);    
+        const array = [];
+        sellers.map(seller => {
+            array.push({
+                id: seller.id,
+                username: seller.username,
+                email: seller.email,
+                full_name: seller.full_name
+            });
+        });
+        res.status(200).json(array);
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -29,12 +38,18 @@ function createSeller(req, res) {
 async function signUpSeller(req, res) {
     const body = req.body;
     try { 
-        const seller = await Sellers.create(body);
-        const {salt, hash} = Sellers.createPassword(body['password']);
-        seller.password_salt = salt;
-        seller.password_hash = hash;
-        await seller.save();
-        res.status(201).json(seller);
+        const existId = await Sellers.findOne({where:{id: body.id}});
+        // console.log("USER: ",existId);
+        if(!existId){
+            const seller = await Sellers.create(body);
+            const {salt, hash} = Sellers.createPassword(body['password']);
+            seller.password_salt = salt;
+            seller.password_hash = hash;
+            await seller.save();
+            res.status(201).json(seller);
+        } else {
+            res.status(400).json({message:"Id en existencia, use otro"});
+        }
     } catch (err) {
         if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
             return res.status(400).json({
@@ -47,6 +62,22 @@ async function signUpSeller(req, res) {
     }
 }
 
+async function logInSeller(req, res) {
+    const body = req.body;
+    const user = await Sellers.findOne({where: {username: body['username']}});
+    if (!user) {
+        return res.status(404).json({error: "User not found"});
+    }
+    if (Sellers.validatePassword(body['password'], user.password_salt, user.password_hash)) {
+        return res.status(200).json({
+            user: user.username,
+            email: user.email,
+            token: Sellers.generateJWT(user)
+        }); // JWT
+    } else {
+        return res.status(400).json({mensaje: "Password Incorrecto"});
+    }
+}
 
 async function updateSeller(req, res) {
     const id = req.params.id;
@@ -64,4 +95,4 @@ async function deleteSeller(req, res) {
     res.status(200).json(deleted);
 }
 
-module.exports = { getSellers, getSeller, createSeller, updateSeller, deleteSeller,signUpSeller };
+module.exports = { getSellers, getSeller, createSeller, updateSeller, deleteSeller, signUpSeller, logInSeller };
