@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 1e82b5128e57dedc501ad777662b40f95292c29b
 // configure the Swagger UI
 const options = {
     definition: {
@@ -12,20 +8,12 @@ const options = {
             description:
                 "Este es un CRUD API de la F2 de Bedu hecho con Express y documentado con Swagger",
             contact: {
-<<<<<<< HEAD
-                name: "Equipo-16 - GitHub repository",
-=======
                 name: "Equipo-16",
->>>>>>> 1e82b5128e57dedc501ad777662b40f95292c29b
                 url: "https://github.com/wayusei/FonDiDita",
                 email: ""
             },
         }
     },
-<<<<<<< HEAD
-    server: "localhost:3000/",
-=======
->>>>>>> 1e82b5128e57dedc501ad777662b40f95292c29b
     apis: ["./routes/*.js"],
     components: {
         securitySchemes: {
@@ -71,9 +59,5 @@ const options = {
     }
 }
 
-<<<<<<< HEAD
-module.exports = options
-=======
 module.exports = options
 
->>>>>>> 1e82b5128e57dedc501ad777662b40f95292c29b
