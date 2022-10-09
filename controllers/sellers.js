@@ -1,8 +1,16 @@
 const Sellers = require('../models/sellers');
 
 async function getSellers(req, res) {
-    const sellers = await Sellers.findAll();
-    res.status(200).json(sellers);    
+    try {
+        const sellers = await Sellers.findAll();
+        res.status(200).json(sellers);    
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'Internal server error',
+            error
+        })
+    }
 }
 
 async function getSeller(req, res) {
