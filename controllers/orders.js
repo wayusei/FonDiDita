@@ -22,6 +22,7 @@ async function getOrders(req, res) {
  * @returns 
  */
 async function getOrdersByCustomer(req, res) {
+
     const id = req.params.id;
     const orders = await Orders.findAll({where: {customer_id: id}});
     if(!orders){
@@ -29,6 +30,7 @@ async function getOrdersByCustomer(req, res) {
     }
     res.status(200).json(orders);    
 }
+
 
 /**
  * Obtiene una orden mediante un id
@@ -56,6 +58,7 @@ async function createOrder(req, res) {
     }).catch(function(error){
         console.log(error);
         res.status(500).json({message: 'Internal server error'});
+
     });
 }
 
@@ -88,4 +91,6 @@ async function deleteOrder(req, res) {
     res.status(200).json(deleted);
 }
 
+
 module.exports = { getOrders, getOrder, getOrdersByCustomer, createOrder, updateOrder, deleteOrder };
+
