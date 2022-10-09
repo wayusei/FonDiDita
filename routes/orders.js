@@ -244,7 +244,6 @@ router.get('/customer/:id', getOrdersByCustomer);
  */
 router.post('/', createOrder);
 
-
 /**
  * @openapi
  * '/orders/{id}':

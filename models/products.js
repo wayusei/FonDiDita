@@ -28,7 +28,7 @@ const Products = sequelize.define('products', {
     category:{
         type: DataTypes.INTEGER
     },
-    seller_id:{ // NOTA: Este parece no necesitarce al hacerce la asociación
+    seller_id:{ 
         type: DataTypes.INTEGER
     }
 },
@@ -36,11 +36,5 @@ const Products = sequelize.define('products', {
     freezeTableName: true,
     timestamps:false
 });
-
-// Associations
-/* Products.hasMany(Orders_Details, {
-    foreignKey: 'product_id'
-});
-Orders_Details.belongsTo(Products); */
 
 module.exports = Products;

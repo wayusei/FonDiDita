@@ -51,35 +51,19 @@ async function signUp(req, res) {
 async function encriptarTodo(req, res) {
     
     const customers = await Customers.findAll();
-    //const j= res.json(customers);
-    //    res.status(200).json(customers);    
 
-    
-    //console.log(customers);
-
-    
     for(const element of customers){
-
-        //console.log(element.id);//
-        
+       
         const id= element.id;
 
             const {salt, hash} = Customers.createPassword('1234');
-            
 
             await Customers.update(
                 {   password_salt:salt,
                     password_hash:hash},
                         {where: {id}}
             );
-            //const god_updated = await Customers.findByPk(id);
-            //res.status(200).json(god_updated);
-
-    }
-    
-
-
-   
+    }  
 }
 
 async function logIn(req, res) {
@@ -93,7 +77,7 @@ async function logIn(req, res) {
             cus: cus.username,
             email: cus.email,
             token: Customers.generateJWT(cus)
-        }); // JWT
+        }); 
     } else {
         return res.status(400).json({mensaje: "Password Incorrecto"});
     }
