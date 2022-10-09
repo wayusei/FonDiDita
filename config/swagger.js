@@ -27,4 +27,4 @@ const options = {
     }
 }
 
-module.exports = options;
+module.exports = options
