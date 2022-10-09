@@ -14,7 +14,7 @@ const Sellers = sequelize.define('sellers', {
     email:{
         type: DataTypes.STRING
     },
-    password:{
+    password_hash:{
         type: DataTypes.STRING
     },
     full_name:{
@@ -22,7 +22,10 @@ const Sellers = sequelize.define('sellers', {
     },
     account:{
         type: DataTypes.STRING
-    }
+    },
+    password_salt:{
+        type: DataTypes.STRING
+    },
 },
 {
     freezeTableName: true,
