@@ -11,13 +11,13 @@ async function getCustomers(req, res) {
 async function getCustomerbyId(req, res) {
     const id = req.params.id;
     
-    const cus = await Customers.findAll({
-        where: {id:id}, attributes:['username','password_salt']
+    const cus = await Customers.findByPk(id);   
+    if(cus==null){
+        res.status(404).json({"error":"Cliente no encontrado"});
+    }else{
+        res.status(200).json(cus);
+    }
     
-    });
-    
-
-    res.status(200).json(cus);
 }
 
 function insertCustomer(req, res) {
@@ -48,39 +48,7 @@ async function signUp(req, res) {
     }
 }
 
-async function encriptarTodo(req, res) {
-    
-    const customers = await Customers.findAll();
-    //const j= res.json(customers);
-    //    res.status(200).json(customers);    
 
-    
-    //console.log(customers);
-
-    
-    for(const element of customers){
-
-        //console.log(element.id);//
-        
-        const id= element.id;
-
-            const {salt, hash} = Customers.createPassword('1234');
-            
-
-            await Customers.update(
-                {   password_salt:salt,
-                    password_hash:hash},
-                        {where: {id}}
-            );
-            //const god_updated = await Customers.findByPk(id);
-            //res.status(200).json(god_updated);
-
-    }
-    
-
-
-   
-}
 
 async function logIn(req, res) {
     const body = req.body;
@@ -90,7 +58,7 @@ async function logIn(req, res) {
     }
     if (Customers.validatePassword(body['password'], cus.password_salt, cus.password_hash)) {
         return res.status(200).json({
-            cus: cus.username,
+            username: cus.username,
             email: cus.email,
             token: Customers.generateJWT(cus)
         }); // JWT
@@ -100,11 +68,22 @@ async function logIn(req, res) {
 }
 
 
+
+
+async function deleteCustomer(req, res) {
+    const id = req.params.id;
+    const deleted = Customers.destroy(
+        {where: {id} }
+    );
+    res.status(200).json({"message":"Usuario eliminado"});
+}
+
+
 module.exports = {
     getCustomers,
     getCustomerbyId,
     insertCustomer,
     signUp,
     logIn,
-    encriptarTodo,
+    deleteCustomer,
 }

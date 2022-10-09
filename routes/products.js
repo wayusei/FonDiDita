@@ -104,8 +104,8 @@ router.get('/:id', getProduct);
  *  post:
  *     tags:
  *     - Products
- *     summary: Crea un producto.
- *     description: Crea un nuevo producto y lo agrega a la BD.
+ *     summary: Crea un producto (requiere token).
+ *     description: Crea un nuevo producto y lo agrega a la BD. Este módulo requiere autorización por lo que se neceistará copiar y pegar el token de la función de Customers/LogIn
  *     security:
  *        - bearerAuth: []
  *     requestBody:
