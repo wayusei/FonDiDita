@@ -48,8 +48,6 @@ async function signUp(req, res) {
     }
 }
 
-
-
 async function logIn(req, res) {
     const body = req.body;
     const cus = await Customers.findOne({where: {username: body['username']}});
@@ -61,7 +59,7 @@ async function logIn(req, res) {
             username: cus.username,
             email: cus.email,
             token: Customers.generateJWT(cus)
-        }); // JWT
+        }); 
     } else {
         return res.status(400).json({mensaje: "Password Incorrecto"});
     }
