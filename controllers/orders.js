@@ -1,20 +1,32 @@
-const Sellers = require('../models/sellers');
+const Orders = require('../models/orders');
+const Orders = require('../models/orders');
+const Orders = require('../models/orders');
 
-async function getSellers(req, res) {
-    const sellers = await Sellers.findAll();
-    res.status(200).json(sellers);    
+async function getOrders(req, res) {
+    const orders = await Orders.findAll();
+    res.status(200).json(orders);    
 }
 
-async function getSeller(req, res) {
+async function getCustomerOrders(req, res) {
+    const customerId = req.params.customerId;
+    const orders = await Orders.findAll({
+        where: {
+            
+        }
+    });
+    res.status(200).json(orders);    
+}
+
+async function getOrder(req, res) {
     const id = req.params.id;
     const seller = await Sellers.findByPk(id);
     res.status(200).json(seller);
 }
 
-function createSeller(req, res) {
+function createOrder(req, res) {
     const body = req.body;
-    Sellers.create(body).then(seller => {
-        res.status(201).json(seller);
+    Orders.create(body).then(order => {
+        res.status(201).json(order);
     });
 }
 
@@ -35,4 +47,4 @@ async function deleteSeller(req, res) {
     res.status(200).json(deleted);
 }
 
-module.exports = { getSellers, getSeller, createSeller, updateSeller, deleteSeller };
+module.exports = { createOrder, getSellers, getSeller, createSeller, updateSeller, deleteSeller };
