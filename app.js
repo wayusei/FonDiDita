@@ -8,9 +8,6 @@ const swaggerOptions = require('./config/swagger');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI =require('swagger-ui-express');
 
-//const YAML = require('yamljs');
-//const swaggerDocument = YAML.load('./config/swagger.yaml');
-
 const app = express();
 app.use(express.json());
 app.use(auth.optional);

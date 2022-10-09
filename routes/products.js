@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { getProducts, getProduct, createProduct, updateProduct, deleteProduct } = require('../controllers/products')
+const auth = require('../config/auth');
+
 
 /**
  * @openapi
@@ -104,6 +106,8 @@ router.get('/:id', getProduct);
  *     - Products
  *     summary: Crea un producto.
  *     description: Crea un nuevo producto y lo agrega a la BD.
+ *     security:
+ *        - bearerAuth: []
  *     requestBody:
  *        required: true
  *        content:
@@ -122,43 +126,59 @@ router.get('/:id', getProduct);
  *                  properties:
  *                      id:
  *                          type: integer
+ *                          example: 18
  *                      name:
  *                          type: string
+ *                          example: Aceitunas
  *                      price:
  *                          type: integer
+ *                          example: 180
  *                      description:
  *                          type: string
+ *                          example: Aceitunas de la mejor calidad
  *                      image:
  *                          type: string
+ *                          example: /src/images/aceituna.png
  *                      thumbnail:
  *                          type: string
+ *                          example: thumbnail
  *                      category:
  *                          type: integer
+ *                          example: 4
  *                      seller_id:
  *                          type: integer
+ *                          example: 1
  *     responses:
  *      201:
  *        description: Se creo el producto exitosamente.
  *        content:
  *          application/json:
  *            schema:
- *               properties:
- *                  id:
- *                    type: integer
- *                  name:
- *                    type: string
- *                  price:
- *                    type: integer
- *                  description:
- *                    type: string
- *                  image:
- *                    type: string
- *                  thumbnail:
- *                    type: string
- *                  category:
- *                    type: integer
- *                  seller_id:
- *                    type: integer
+ *                  properties:
+ *                      id:
+ *                          type: integer
+ *                          example: 18
+ *                      name:
+ *                          type: string
+ *                          example: Aceitunas
+ *                      price:
+ *                          type: integer
+ *                          example: 180
+ *                      description:
+ *                          type: string
+ *                          example: Aceitunas de la mejor calidad
+ *                      image:
+ *                          type: string
+ *                          example: /src/images/aceituna.png
+ *                      thumbnail:
+ *                          type: string
+ *                          example: thumbnail
+ *                      category:
+ *                          type: integer
+ *                          example: 4
+ *                      seller_id:
+ *                          type: integer
+ *                          example: 1
  * 
  *      500:
  *        description: Error al crear el producto
@@ -168,8 +188,16 @@ router.get('/:id', getProduct);
  *              properties:
  *                 message:
  *                   type: string
+ *      401:
+ *        description: Sin autorización
+ *        content: 
+ *          application/json:
+ *              schema:
+ *                  properties:
+ *                      message:
+ *                          type: string
  */
-router.post('/', createProduct);
+router.post('/', auth.required, createProduct);
 
 /**
  * @openapi
