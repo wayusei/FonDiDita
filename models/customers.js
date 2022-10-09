@@ -48,6 +48,8 @@ Customers.validatePassword = function(password, user_salt, user_hash) {
     return user_hash === hash;
 }
 
+
+
 Customers.generateJWT = function(user) {
     const today = new Date();
     const exp = new Date(today);
@@ -59,17 +61,5 @@ Customers.generateJWT = function(user) {
     }, secret);
 }
 
-/**
- * 
- * @swagger 
- * /customers/:
- * get:
- *  summary: Creación y consulta de clientes (customers)
- *  produces: 
- *      - application/json
- *  responses: 
- *      200:
- *          description: Todos los clientes
- *          type: json
- */
+
 module.exports = Customers;
