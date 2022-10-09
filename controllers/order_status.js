@@ -1,38 +1,81 @@
-const Sellers = require('../models/sellers');
+const OrderStatus = require('../models/order_status');
 
-async function getSellers(req, res) {
-    const sellers = await Sellers.findAll();
-    res.status(200).json(sellers);    
+
+/**
+ * Obtiene una lista de los estatus de orden
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function getOrderStatus(req, res) {
+    try {
+        const orderStatuses = await OrderStatus.findAll();
+        res.status(200).json(orderStatuses);
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'Internal server error',
+            error
+        })
+    }
 }
 
-async function getSeller(req, res) {
+/**
+ * Obtiene un estatus de orden mediante un id
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function getOrderStatusById(req, res) {
     const id = req.params.id;
-    const seller = await Sellers.findByPk(id);
-    res.status(200).json(seller);
+    const orderStatus = await OrderStatus.findByPk(id);
+    if (!orderStatus) {
+        return res.status(404).json({ message: "Estatus de orden no encontrado" });
+    }
+    res.status(200).json(orderStatus);
 }
 
-function createSeller(req, res) {
+/**
+ * Se crea estatus de orden y la guarda en la bd
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function createOrderStatus(req, res) {
+
     const body = req.body;
-    Sellers.create(body).then(seller => {
-        res.status(201).json(seller);
+    await OrderStatus.create(body).then(orderStatus => {
+        res.status(201).json(orderStatus);
+    }).catch(function(error){
+        console.log(error);
+        res.status(500).json({
+            message: 'Internal server error'
+        })
     });
 }
 
-
-async function updateSeller(req, res) {
+/**
+ * Función que nos permite actualizar la información de un estatus de orden creado anteriormente
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function updateOrderStatus(req, res) {
     const id = req.params.id;
-    const seller = req.body;
-    await Sellers.update(seller, {where: {id}});
-    const seller_updated = await Sellers.findByPk(id);
-    res.status(200).json(seller_updated);
+    const orderStatus = req.body;
+    await OrderStatus.update(orderStatus, {where: {id}});
+    const orderStatus_updated = await OrderStatus.findByPk(id);
+    res.status(200).json(orderStatus_updated);
 }
 
-async function deleteSeller(req, res) {
+/**
+ * Función que nos permite eliminar una categoria por id
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function deleteOrderStatus(req, res) {
     const id = req.params.id;
-    const deleted = Sellers.destroy(
+    const deletedOrderStatus = OrderStatus.destroy(
         {where: {id} }
     );
-    res.status(200).json(deleted);
+    res.status(200).json(deletedOrderStatus);
 }
 
-module.exports = { getSellers, getSeller, createSeller, updateSeller, deleteSeller };
+module.exports = { getOrderStatus, getOrderStatusById, createOrderStatus, updateOrderStatus, deleteOrderStatus };

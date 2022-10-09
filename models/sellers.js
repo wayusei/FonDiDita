@@ -1,7 +1,9 @@
 const { Sequelize, DataTypes} = require('sequelize');
 const sequelize = require('../config/db');
 const Products = require('./products');
-
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const secret = require('../config/secret');
 
 const Sellers = sequelize.define('sellers', {
     id:{
@@ -48,10 +50,15 @@ Sellers.validatePassword = function(password, user_salt, user_hash) {
     return user_hash === hash;
 }
 
-// Associations
-/* Sellers.hasMany(Products, {
-    foreignKey: 'seller_id'
-});
-Products.belongsTo(Sellers); */
+Sellers.generateJWT = function(user) {
+    const today = new Date();
+    const exp = new Date(today);
+    exp.setDate(today.getDate() + 60); // En 2 meses
+
+    return jwt.sign({
+        user: user.username,
+        exp: parseInt(exp.getTime() / 1000) // En segundos
+    }, secret);
+}
 
 module.exports = Sellers;
