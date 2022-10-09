@@ -109,7 +109,7 @@ router.get('/:id', getOrder);
 
 /**
  * @openapi
- * '/orders/{customer_id}':
+ * '/orders/customer/{customer_id}':
  *  get:
  *     tags:
  *     - Orders
@@ -164,7 +164,7 @@ router.get('/:id', getOrder);
  *                 error:
  *                  type: string
  */
-router.get('/:id', getOrdersByCustomer);
+router.get('/customer/:id', getOrdersByCustomer);
 
 /**
  * @openapi
