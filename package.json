@@ -20,7 +20,9 @@
     "sequelize": "^6.24.0",
     "sqlite3": "^5.1.2",
     "swagger-jsdoc": "^6.2.5",
-    "swagger-ui-express": "^4.5.0"
+    "swagger-ui-express": "^4.5.0",
+    "yamljs": "^0.3.0"
+
   },
   "repository": {
     "type": "git",
