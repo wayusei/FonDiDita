@@ -1,11 +1,11 @@
 const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize(
-  'dcj3ffcuchm1cb',
-  'afkiwlqbyyxtzq',
-  'cf1a7745a49e8c496f62721d2b916b54541826b636b3776f50bbfba369a37c9a',
+  process.env.DATABASE,
+  process.env.DB_USER,
+  process.env.PASSWORD,
   {
-    host: 'ec2-18-208-55-135.compute-1.amazonaws.com',
+    host: process.env.HOST,
     dialect: 'postgres',
     dialectOptions: {
       ssl: { require: true, rejectUnauthorized: false }
@@ -20,5 +20,7 @@ try {
 } catch (error) {
   console.error('Hubo un problema con la conexión', error);
 }
+
+
 
 module.exports = sequelize;
