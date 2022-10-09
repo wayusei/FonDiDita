@@ -30,12 +30,11 @@ const Orders = sequelize.define('orders', {
     order_status: {
         type: DataTypes.INTEGER
     }
+},
+{
+    freezeTableName: true,
+    timestamps:false
 });
 
-// Associations
-Orders.hasMany(Orders_Details, {
-    foreignKey: 'order_id'
-});
-Orders_Details.belongsTo(Orders);
 
 module.exports = Orders;

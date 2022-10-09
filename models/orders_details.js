@@ -20,6 +20,10 @@ const Orders_Details = sequelize.define('orders_details', {
     quantity: {
         type: DataTypes.STRING
     }
+},
+{
+    freezeTableName: true,
+    timestamps:false
 });
 
 module.exports = Orders_Details;

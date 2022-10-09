@@ -37,16 +37,16 @@ async function getOrdersDetailByProduct(req, res) {
  * @param {*} res 
  * @returns 
  */
- async function getOrdersDetailByProduct(req, res) {
+ async function getOrdersDetailByOrderId(req, res) {
     const id = req.params.id;
-    const ordersDetailsByOrder = await Orders_Details.findAll({where: {order_id: id}});
+    const ordersDetailsByOrderId = await Orders_Details.findAll({where: {order_id: id}});
     if(!ordersDetailsByOrder){
         return res.status(404).json({message: "Detalle de orden no encontrada"});
     }
-    res.status(200).json(ordersDetailsByOrder);    
+    res.status(200).json(ordersDetailsByOrderId);    
 }
 /**
- * Obtiene detalles de una orden mediante un id
+ * Obtiene detalles de una orden mediante el id de una orden
  * @param {*} req 
  * @param {*} res 
  */
@@ -64,9 +64,9 @@ async function getOrdersDetailsById(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-async function createOrderDetail(req, res) {
+function createOrderDetail(req, res) {
     const body = req.body;
-    await Orders_Details.create(body).then(order_detail => {
+    Orders_Details.create(body).then(order_detail => {
         res.status(201).json(order_detail);
     }).catch(function(error){
         console.log(error);
@@ -103,4 +103,4 @@ async function deleteOrderDetail(req, res) {
     res.status(200).json(deletedDetail);
 }
 
-module.exports = { getOrdersDetails, getOrdersDetailByProduct, getOrdersDetailsById, getOrdersDetails, createOrderDetail, updateOrderDetails, deleteOrderDetail };
+module.exports = { getOrdersDetails, getOrdersDetailByProduct, getOrdersDetailByOrderId, getOrdersDetailsById, createOrderDetail, updateOrderDetails, deleteOrderDetail };
