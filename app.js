@@ -12,11 +12,6 @@ const swaggerUI =require('swagger-ui-express');
 //const swaggerDocument = YAML.load('./config/swagger.yaml');
 
 
-
-const swaggerOptions = require('./config/swagger');
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUI = require('swagger-ui-express');
-
 const app = express();
 app.use(express.json());
 app.use(auth.optional);
